@@ -1,0 +1,139 @@
+/* =========================================
+   GLOBAL STYLE – PURPLE THEME
+========================================= */
+body {
+    background: #f3e8ff;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+.navbar {
+    background: linear-gradient(90deg, #5a00c7, #8a2be2);
+    padding: 12px 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff !important;
+}
+
+/* =========================================
+   HEADINGS
+========================================= */
+h1, h2, h3, h4 {
+    color: #4b0082;
+    font-weight: 600;
+}
+
+/* =========================================
+   CARD STYLING
+========================================= */
+.card {
+    border: 1.5px solid purple;
+    border-radius: 12px;
+    background: #ffffff;
+    transition: 0.3s ease;
+}
+
+.card img{
+    height:300px;
+    width:280px
+
+}
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(90, 0, 199, 0.2);
+}
+
+.card-title {
+    color: #5a00c7;
+    font-weight: 600;
+}
+
+.card-text b {
+    color: #4b0082;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.btn-primary {
+    background: #7b2fff;
+    border: none;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background: #5a00c7;
+}
+
+/* Secondary Buttons */
+.btn-purple {
+    background: #b666ff;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.btn-purple:hover {
+    background: #9d3bff;
+}
+
+/* =========================================
+   FORMS
+========================================= */
+.form-control, select {
+    border-radius: 8px;
+    border-color: #b57dff;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #7b2fff;
+    box-shadow: 0 0 5px rgba(123, 47, 255, 0.5);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+footer {
+    background: linear-gradient(90deg, #5a00c7, #8a2be2);
+    padding: 15px;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* =========================================
+   CUSTOM PAGE SECTIONS
+========================================= */
+.section-purple {
+    background: #e9d1ff;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.hero-box {
+    background: linear-gradient(135deg, #7b2fff, #b666ff);
+    color: #fff;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero-box h1 {
+    color: #fff;
+    font-size: 2.5rem;
+}
+.hero-section {
+    background-image: url("../images/4star.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+}
