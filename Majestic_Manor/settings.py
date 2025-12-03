@@ -14,20 +14,20 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 # --------------------------
 # 🔐 SECURITY
 # --------------------------
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "django-insecure-oz15$zv0dx5m7pm&23_9@a7mjglpv!#o%9s6j&js^6!wb2mfmb"
-)
+# SECRET_KEY = os.environ.get(
+#     "SECRET_KEY",
+#     "django-insecure-oz15$zv0dx5m7pm&23_9@a7mjglpv!#o%9s6j&js^6!wb2mfmb"
+# )
 
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+# DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ["*"]   # Render needs '*'
 
 # --------------------------
 # 🔑 RAZORPAY KEYS
 # --------------------------
-RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID", "rzp_test_RgQ7aqPF3uAVyp")
-RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET", "5Ktz63WjFVnzVBfhAXgNWCHR")
+# RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID", "rzp_test_RgQ7aqPF3uAVyp")
+# RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET", "5Ktz63WjFVnzVBfhAXgNWCHR")
 
 # --------------------------
 # APPS
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 # --------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # ⭐ Required for Render static hosting
+    "whitenoise.middleware.WhiteNoiseMiddleware",  
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
