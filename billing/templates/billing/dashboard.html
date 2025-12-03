@@ -1,0 +1,75 @@
+{% extends "book/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Billing Dashboard</h1>
+    <p>Welcome to the Billing section of Majestic Manor.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Orders</h5>
+                    <p class="card-text display-6">{{ total_orders }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Revenue</h5>
+                    <p class="card-text display-6">₹{{ total_revenue }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Payments</h5>
+                    <p class="card-text display-6">{{ pending_payments }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h3>Recent Transactions</h3>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Payment ID</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in bookings %}
+                <tr>
+                    <td>#{{ b.id }}</td>
+                    <td>{{ b.customer.first_name }} {{ b.customer.last_name }}</td>
+                    <td>₹{{ b.total_amount }}</td>
+                    <td>{{ b.razorpay_payment_id|default:"—" }}</td>
+
+                    {% if b.status == "confirmed" %}
+                        <td><span class="badge bg-success">Paid</span></td>
+                    {% elif b.status == "pending" %}
+                        <td><span class="badge bg-warning text-dark">Pending</span></td>
+                    {% else %}
+                        <td><span class="badge bg-danger">Failed</span></td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No transactions yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

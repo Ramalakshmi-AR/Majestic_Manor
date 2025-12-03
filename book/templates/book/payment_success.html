@@ -1,0 +1,27 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="text-center mt-5">
+
+    {% if booking.status == "confirmed" %}
+        <h2 class="text-success">Payment Successful!</h2>
+        <p>Your booking has been confirmed.</p>
+    {% else %}
+        <h2 class="text-danger">Payment Failed</h2>
+        <p>Your payment could not be verified.</p>
+    {% endif %}
+
+    <div class="card p-4 shadow mt-4 w-50 mx-auto">
+        <h5>Booking Details</h5>
+        <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+        <p><strong>Customer:</strong> {{ booking.customer.first_name }} {{ booking.customer.last_name }}</p>
+        <p><strong>Room:</strong> {{ booking.room.number }} ({{ booking.room.get_room_type_display }})</p>
+        <p><strong>Check-in:</strong> {{ booking.check_in }}</p>
+        <p><strong>Check-out:</strong> {{ booking.check_out }}</p>
+        <p><strong>Total Paid:</strong> ₹{{ booking.total_amount }}</p>
+    </div>
+
+    <a href="/" class="btn btn-primary mt-4">Back to Home</a>
+</div>
+{% endblock %}

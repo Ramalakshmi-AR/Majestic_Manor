@@ -1,0 +1,29 @@
+{% extends "book/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>About Majestic Manor</h1>
+    <p>Welcome to Majestic Manor, where luxury meets comfort. Our hotel offers world-class amenities and exceptional hospitality to ensure your stay is unforgettable.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Our Mission</h3>
+            <p>Our mission is to provide our guests with a comfortable and memorable stay, with impeccable service and attention to detail.</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Our Vision</h3>
+            <p>We strive to be the leading hospitality provider, recognized for excellence, innovation, and personalized experiences.</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h3>Our Team</h3>
+        <p>Our dedicated team is committed to making your stay enjoyable, from our reception staff to housekeeping and management.</p>
+    </div>
+
+    <div class="mt-4">
+        <h3>Contact Us</h3>
+        <p>For inquiries or booking information, please visit our <a href="{% url 'contact:index' %}">Contact Us</a> page.</p>
+    </div>
+</div>
+{% endblock %}

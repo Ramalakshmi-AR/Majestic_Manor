@@ -1,0 +1,14 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Room {{ room.number }} - {{ room.get_room_type_display }}</h2>
+
+<div class="card p-3 shadow mt-3">
+    <p><strong>Description:</strong> {{ room.description }}</p>
+    <p><strong>Price per night:</strong> ₹{{ room.price_per_night }}</p>
+
+    <a href="{% url 'book:book_room' room.id %}" class="btn btn-success mt-3">Book This Room</a>
+</div>
+
+{% endblock %}

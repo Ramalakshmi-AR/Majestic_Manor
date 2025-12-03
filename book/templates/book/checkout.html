@@ -1,0 +1,60 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2 class="text-center">Checkout</h2>
+
+<div class="card shadow p-4 mt-3">
+
+    <h4>Booking Summary</h4>
+    <p><strong>Room:</strong> {{ booking.room.number }} ({{ booking.room.get_room_type_display }})</p>
+    <p><strong>Total Amount:</strong> ₹{{ booking.total_amount }}</p>
+
+    <button id="rzp-button" class="btn btn-success w-100 mt-4">Pay with Razorpay</button>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+     "key": "{{ razorpay_key_id }}",
+    "amount": "{{ amount_paise }}", 
+    "currency": "INR",
+
+    "display_amount": "{{ booking.total_amount }}",  
+    "display_currency": "INR",
+    "name": "Majestic Manor",
+    "description": "Room Booking Payment",
+    "order_id": "{{ order_id }}",
+
+    "handler": function (response){
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "{% url 'payment_success' %}";
+
+        var fields = {
+            "razorpay_payment_id": response.razorpay_payment_id,
+            "razorpay_order_id": response.razorpay_order_id,
+            "razorpay_signature": response.razorpay_signature
+        };
+
+        for (var key in fields) {
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = key;
+            input.value = fields[key];
+            form.appendChild(input);
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+};
+
+var rzp = new Razorpay(options);
+document.getElementById('rzp-button').onclick = function(e){
+    rzp.open();
+    e.preventDefault();
+}
+</script>
+
+{% endblock %}

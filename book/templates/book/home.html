@@ -1,0 +1,71 @@
+{% extends "book/base.html" %}
+{% load static %}
+{% block title %}Home — Majestic Manor{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero-section text-white d-flex align-items-center">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Welcome to Majestic Manor</h1>
+        <p class="lead">Experience Luxury, Comfort & World-Class Hospitality.</p>
+        <a href="{% url 'book:room_list' %}" class="btn btn-primary btn-lg mt-3 px-4">
+            Book Your Stay
+        </a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold">About Majestic Manor</h2>
+        <p class="text-muted mt-3">
+            Majestic Manor offers premium rooms, fine dining, and warm hospitality.
+            Whether for business or holiday, we guarantee a luxurious and peaceful stay.
+        </p>
+    </div>
+</section>
+
+<!-- ROOMS -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-4">Our Featured Rooms</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="{% static 'book/images/single+.jpeg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Deluxe Suite</h5>
+                        <p class="text-muted">Spacious, comfortable & elegant.</p>
+                        <a href="{% url 'book:room_list' %}" class="btn btn-outline-primary w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="{% static 'book/images/meeting.jpeg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Executive Room</h5>
+                        <p class="text-muted">Perfect for business travelers.</p>
+                        <a href="{% url 'book:room_list' %}" class="btn btn-outline-primary w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="{% static 'book/images/duble+.jpeg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Family Room</h5>
+                        <p class="text-muted">Spacious & comfortable for families.</p>
+                        <a href="{% url 'book:room_list' %}" class="btn btn-outline-primary w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
