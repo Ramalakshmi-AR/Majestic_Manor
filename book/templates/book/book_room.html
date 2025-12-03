@@ -2,28 +2,55 @@
 {% load static %}
 
 {% block content %}
-<h2>Book Room {{ room.number }}</h2>
+<div class="container mt-4">
+    <h2 class="text-center mb-3">Book Room {{ room.number }}</h2>
 
-<div class="card shadow p-4 mt-3">
-    <form method="POST">
-        {% csrf_token %}
+    <div class="card shadow p-4">
+        <form method="POST">
+            {% csrf_token %}
 
-        <h4>Customer Details</h4>
-        <input type="text" name="first_name" class="form-control" placeholder="First Name" required><br>
-        <input type="text" name="last_name" class="form-control" placeholder="Last Name" required><br>
-        <input type="email" name="email" class="form-control" placeholder="Email" required><br>
-        <input type="text" name="phone" class="form-control" placeholder="Phone" required><br>
+            <!-- Customer Details -->
+            <h4 class="mb-3">Customer Details</h4>
 
-        <hr>
+            <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" name="first_name" class="form-control" placeholder="Enter first name" required>
+            </div>
 
-        <h4>Booking Details</h4>
-        <label>Check-in:</label>
-        <input type="date" name="check_in" required class="form-control"><br>
+            <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" name="last_name" class="form-control" placeholder="Enter last name">
+            </div>
 
-        <label>Check-out:</label>
-        <input type="date" name="check_out" required class="form-control"><br>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter email address" required>
+            </div>
 
-        <button class="btn btn-primary mt-3 w-100">Proceed to Payment</button>
-    </form>
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input type="text" name="phone" class="form-control" placeholder="Enter phone number" required>
+            </div>
+
+            <hr>
+
+            <!-- Booking Details -->
+            <h4 class="mb-3">Booking Details</h4>
+
+            <div class="mb-3">
+                <label class="form-label">Check-in Date</label>
+                <input type="date" name="check_in" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Check-out Date</label>
+                <input type="date" name="check_out" class="form-control" required>
+            </div>
+
+            <button class="btn btn-primary mt-3 w-100">
+                Proceed to Payment
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}

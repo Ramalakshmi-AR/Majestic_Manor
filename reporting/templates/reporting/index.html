@@ -1,6 +1,90 @@
 {% extends "book/base.html" %}
+{% load static %}
 
 {% block content %}
-<h1>Reporting Dashboard</h1>
-<p>Welcome to the Reporting page.</p>
+
+<!-- Header Image -->
+<div class="text-center mb-4">
+    <img src="{% static 'images/book.jpeg' %}" 
+         alt="Reporting Banner"
+         height="280"
+         width="900"
+         class="img-fluid rounded shadow">
+</div>
+
+<h1 class="text-center mb-3">Reporting Dashboard</h1>
+<p class="text-center text-muted mb-5">
+    View all important reports, analytics, and business insights in one place.
+</p>
+
+<div class="container">
+
+    <!-- Statistics Cards -->
+    <div class="row text-center mb-5">
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="text-primary">Total Bookings</h5>
+                <h2>120</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="text-success">Completed Stays</h5>
+                <h2>98</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="text-warning">Pending Payments</h5>
+                <h2>15</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="text-danger">Cancelled Bookings</h5>
+                <h2>7</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Summary Section -->
+    <h3 class="mb-3">Monthly Booking Summary</h3>
+    <div class="card shadow-sm mb-5">
+        <div class="card-body">
+            <p>
+                This section displays the monthly statistics including room occupancy, 
+                revenue overview, customer trends, and peak booking times.
+            </p>
+            <p>
+                You can customize this with real data from your Django backend.
+            </p>
+
+            <!-- Placeholder chart image -->
+            <img src="{% static 'images/monthly.png' %}" 
+                 class="img-fluid rounded mt-3"
+                 alt="Chart Placeholder">
+        </div>
+    </div>
+
+    <!-- Revenue Report Section -->
+    <h3 class="mb-3">Revenue Analysis</h3>
+    <div class="card shadow-sm mb-5">
+        <div class="card-body">
+            <p>
+                Track your total earnings, room-wise revenue, and monthly financial growth.
+            </p>
+            <ul>
+                <li>💰 Total Revenue This Month: ₹ 1,45,000</li>
+                <li>🏨 Highest Earning Room Type: Deluxe Suite</li>
+                <li>📅 Peak Booking Day: Saturday</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
 {% endblock %}

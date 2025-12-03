@@ -1,6 +1,79 @@
 {% extends "book/base.html" %}
+{% load static %}
 
 {% block content %}
-<h1>Hospitality Dashboard</h1>
-<p>Welcome to the Hospitality page.</p>
+
+<!-- Banner Section -->
+<div class="text-center mb-4">
+    <img src="{% static 'images/conference.jpeg' %}" 
+         alt="Hospitality Banner" 
+          height="280"
+         width="900"
+         class="img-fluid rounded shadow">
+</div>
+
+<h1 class="text-center mb-3">Hospitality Dashboard</h1>
+<p class="text-center text-muted mb-5">
+    Experience comfort, care, and luxury with our top-class hospitality services.
+</p>
+
+<!-- Content Section -->
+<div class="container">
+
+    <!-- Services Section -->
+    <h3 class="mb-3">Our Hospitality Services</h3>
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="{% static 'images/doorstep.jpeg' %}" class="card-img-top" alt="Room Service">
+                <div class="card-body">
+                    <h5 class="card-title">Room Service</h5>
+                    <p class="card-text">
+                        Available 24/7, delivering meals, beverages, and essentials directly to your room.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="{% static 'images/hospitality.jpeg' %}" class="card-img-top" alt="Housekeeping">
+                <div class="card-body">
+                    <h5 class="card-title">Housekeeping</h5>
+                    <p class="card-text">
+                        Our professional team ensures your room is spotless and hygienic every day.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="{% static 'images/food.jpeg' %}" class="card-img-top" alt="Restaurant">
+                <div class="card-body">
+                    <h5 class="card-title">Restaurant</h5>
+                    <p class="card-text">
+                        Enjoy delicious meals prepared by experienced chefs from multiple cuisines.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Additional Content -->
+    <hr class="my-5">
+
+    <h3 class="mb-3">Why Choose Us?</h3>
+    <ul class="list-group mb-5">
+        <li class="list-group-item">✔ Luxury rooms with modern facilities</li>
+        <li class="list-group-item">✔ Friendly and professional staff</li>
+        <li class="list-group-item">✔ 24/7 customer support</li>
+        <li class="list-group-item">✔ Clean and peaceful environment</li>
+        <li class="list-group-item">✔ Delicious food & prompt service</li>
+    </ul>
+
+</div>
+
 {% endblock %}

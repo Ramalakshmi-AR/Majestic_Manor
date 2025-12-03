@@ -16,7 +16,7 @@
 
     <p style="font-size: 16px;">
         <strong>Room:</strong> {{ booking.room.number }}<br>
-        <strong>Amount:</strong> ₹{{ amount|floatformat:2 }}<br>
+        <strong>Amount:</strong> ₹{{ booking.total_amount|floatformat:2 }}<br>
         <strong>Currency:</strong> {{ currency }}
     </p>
 
@@ -41,14 +41,24 @@
 
 <script>
 var options = {
-    "key": "{{ razorpay_key_id }}",
-    "amount": "{{ amount }}",
+    "key": "{{ razorpay_key_id }}", // Razorpay Key ID from settings
+    "amount": "{{ amount_paise }}", // Amount in paise
     "currency": "{{ currency }}",
     "name": "Majestic Manor",
     "order_id": "{{ razorpay_order_id }}",
     "handler": function (response) {
-        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-        // TODO: send ID to backend for verification
+        // Send payment details to Django backend for verification
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = "{% url 'book:payment_success' %}";
+        form.innerHTML = `
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <input type="hidden" name="razorpay_payment_id" value="${response.razorpay_payment_id}">
+            <input type="hidden" name="razorpay_order_id" value="${response.razorpay_order_id}">
+            <input type="hidden" name="razorpay_signature" value="${response.razorpay_signature}">
+        `;
+        document.body.appendChild(form);
+        form.submit();
     }
 };
 
