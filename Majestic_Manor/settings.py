@@ -24,11 +24,13 @@ SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-only")
 DEBUG = os.getenv("DEBUG", "True") == "True"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
-# ----------------------------------------------------
-# RAZORPAY KEYS
-# ----------------------------------------------------
-RAZORPAY_KEY_ID="rzp_test_RgQ7aqPF3uAVyp"
-RAZORPAY_KEY_SECRET="5Ktz63WjFVnzVBfhAXgNWCHR"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
+
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
+
+
 
 # ----------------------------------------------------
 # INSTALLED APPS
@@ -134,9 +136,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# If using Cloudinary (optional), uncomment below:
-# DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-# CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
 # ----------------------------------------------------
 # DEFAULT PRIMARY KEY FIELD
