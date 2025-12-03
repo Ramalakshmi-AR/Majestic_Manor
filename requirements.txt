@@ -1,5 +1,5 @@
 asgiref==3.8.1
-certifi==2025.9.9
+certifi==2023.11.17
 charset-normalizer==3.3.2
 dj-database-url==1.0.0
 Django==5.2.8
