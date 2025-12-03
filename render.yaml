@@ -2,14 +2,17 @@ services:
   - type: web
     name: majestic-manor
     env: python
+    plan: free
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
     startCommand: "gunicorn Majestic_Manor.wsgi:application"
     envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: Majestic_Manor.settings
       - key: SECRET_KEY
         sync: false
-      - key: CLOUDINARY_URL
-        sync: false
       - key: DEBUG
-        value: "False"
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
