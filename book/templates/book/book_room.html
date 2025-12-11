@@ -4,6 +4,13 @@
 {% block content %}
 <div class="container mt-4">
     <h2 class="text-center mb-3">Book Room {{ room.number }}</h2>
+    <div class="text-center mb-4">
+    <img src="{{ room.main_image.url }}" 
+         class="img-fluid rounded" 
+         style="max-height: 250px;" 
+         alt="Room Image">
+</div>
+
 
     <div class="card shadow p-4">
         <form method="POST">

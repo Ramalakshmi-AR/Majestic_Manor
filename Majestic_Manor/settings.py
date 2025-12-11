@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # Your apps
+ 
     "book",
     "billing",
     "hospitality",
@@ -136,7 +136,18 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # ----------------------------------------------------
 # Using local media folder for development
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Use Cloudinary only when DEBUG = False (production)
+if not DEBUG:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': 'ddi2ve2li',
+        'API_KEY': 'your_key',
+        'API_SECRET': 'your_secret',
+    }
+
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # ----------------------------------------------------

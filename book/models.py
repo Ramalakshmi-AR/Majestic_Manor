@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 
 
 class Room(models.Model):
@@ -14,7 +15,12 @@ class Room(models.Model):
     description = models.TextField(blank=True)
     available = models.BooleanField(default=True)
 
+    # LOCAL STORAGE
     main_image = models.ImageField(upload_to='rooms/', null=True, blank=True)
+
+    def __str__(self):
+        return f"Room {self.number} ({self.get_room_type_display()})"
+
    
     def __str__(self):
         return f"Room {self.number} ({self.get_room_type_display()})"
@@ -57,16 +63,16 @@ class Booking(models.Model):
 class HomePage(models.Model):
     hero_title = models.CharField(max_length=200, default="Welcome to Majestic Manor")
     hero_subtitle = models.CharField(max_length=300, blank=True, null=True)
-    hero_image = models.ImageField(upload_to="homepage/", blank=True, null=True)
 
+    hero_image = models.ImageField(upload_to='homepage/', blank=True, null=True)
     room1_title = models.CharField(max_length=100, blank=True, null=True)
-    room1_image = models.ImageField(upload_to="homepage/", blank=True, null=True)
+    room1_image = models.ImageField(upload_to='homepage/', blank=True, null=True)
 
     room2_title = models.CharField(max_length=100, blank=True, null=True)
-    room2_image = models.ImageField(upload_to="homepage/", blank=True, null=True)
+    room2_image = models.ImageField(upload_to='homepage/', blank=True, null=True)
 
     room3_title = models.CharField(max_length=100, blank=True, null=True)
-    room3_image = models.ImageField(upload_to="homepage/", blank=True, null=True)
+    room3_image = models.ImageField(upload_to='homepage/', blank=True, null=True)
 
     def __str__(self):
         return "Home Page Content"

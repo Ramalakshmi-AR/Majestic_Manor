@@ -12,8 +12,8 @@
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
 
-                    {% if room.image %}
-                        <img src="{{ room.image.url }}" class="card-img-top">
+                    {% if room.main_image %}
+                        <img src="{{ room.main_image.url }}" class="card-img-top">
                     {% else %}
                         <img src="{% static 'book/images/default.jpg' %}" class="card-img-top">
                     {% endif %}
@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ room.room_type }}</h5>
                         <p>{{ room.description|truncatewords:20 }}</p>
-                        <p class="fw-bold">₹{{ room.price }}</p>
+                        <p class="fw-bold">₹{{ room.price_per_night }}</p>
                         <a href="{% url 'book:room_detail' room.id %}" class="btn btn-dark">
                             View Details
                         </a>
