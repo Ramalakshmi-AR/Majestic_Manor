@@ -1,38 +1,42 @@
-"""
-Django settings for Majestic_Manor project.
-"""
-
 import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# ----------------------------------------------------
-# BASE DIRECTORY
-# ----------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ----------------------------------------------------
-# LOAD ENVIRONMENT VARIABLES
-# ----------------------------------------------------
-# Make sure .env exists at the project root
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # ----------------------------------------------------
 # SECURITY
 # ----------------------------------------------------
-SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-only")
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
 DEBUG = os.getenv("DEBUG", "True") == "True"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+# Render adds its hostname in environment variable
+RENDER_HOST = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_HOST:
+    ALLOWED_HOSTS.append(RENDER_HOST)
+
+# ----------------------------------------------------
+# CLOUDINARY
+# ----------------------------------------------------
 CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
+# Local: store files in media/
+# Render: store images in cloudinary
+if DEBUG:
+    DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+else:
+    DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+
+# ----------------------------------------------------
+# RAZORPAY
+# ----------------------------------------------------
 RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
 RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
-
-# RAZORPAY_KEY_ID = "rzp_test_RgQ7aqPF3uAVyp"
-# RAZORPAY_KEY_SECRET = "5Ktz63WjFVnzVBfhAXgNWCHR"
-
 
 # ----------------------------------------------------
 # INSTALLED APPS
@@ -45,7 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
- 
+    # your apps
     "book",
     "billing",
     "hospitality",
@@ -53,7 +57,7 @@ INSTALLED_APPS = [
     "contact",
     "about",
 
-    # Optional: Cloudinary for media storage
+    # cloudinary
     "cloudinary",
     "cloudinary_storage",
 ]
@@ -63,7 +67,7 @@ INSTALLED_APPS = [
 # ----------------------------------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # for static files
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -73,14 +77,29 @@ MIDDLEWARE = [
 ]
 
 # ----------------------------------------------------
-# URLS AND TEMPLATES
+# STATIC FILES
+# ----------------------------------------------------
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# ----------------------------------------------------
+# MEDIA FILES
+# (used only when DEBUG=True)
+# ----------------------------------------------------
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+# ----------------------------------------------------
+# TEMPLATES
 # ----------------------------------------------------
 ROOT_URLCONF = "Majestic_Manor.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],  # global templates
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -116,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # ----------------------------------------------------
-# LANGUAGE / TIME
+# LANGUAGE / TIMEZONE
 # ----------------------------------------------------
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Asia/Kolkata"
@@ -124,39 +143,8 @@ USE_I18N = True
 USE_TZ = True
 
 # ----------------------------------------------------
-# STATIC FILES
+# LOGIN
 # ----------------------------------------------------
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]  # Make sure this folder exists
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+LOGIN_REDIRECT_URL = "book:home"
 
-# ----------------------------------------------------
-# MEDIA FILES
-# ----------------------------------------------------
-# Using local media folder for development
-MEDIA_URL = "/media/"
-# MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Use Cloudinary only when DEBUG = False (production)
-if not DEBUG:
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': 'ddi2ve2li',
-        'API_KEY': 'your_key',
-        'API_SECRET': 'your_secret',
-    }
-
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
-# ----------------------------------------------------
-# DEFAULT PRIMARY KEY FIELD
-# ----------------------------------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# ----------------------------------------------------
-# DEBUG INFO (optional, remove in production)
-# ----------------------------------------------------
-LOGIN_REDIRECT_URL = 'book:home'
-
