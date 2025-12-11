@@ -15,17 +15,13 @@ class Room(models.Model):
         ('double', 'Double'),
         ('suite', 'Suite'),
     )
-
     number = models.CharField(max_length=10, unique=True)
     room_type = models.CharField(max_length=10, choices=ROOM_TYPES)
     price_per_night = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField(blank=True)
     available = models.BooleanField(default=True)
 
-    # switches automatically:
-    # LOCAL → ImageField
-    # RENDER → CloudinaryField
-    main_image = DynamicImageField(upload_to="rooms/", null=True, blank=True)
+    main_image = DynamicImageField(null=True, blank=True)  # works for both local & Cloudinary
 
     def __str__(self):
         return f"Room {self.number} ({self.get_room_type_display()})"
@@ -68,17 +64,17 @@ class Booking(models.Model):
 
 class HomePage(models.Model):
     hero_title = models.CharField(max_length=200, default="Welcome to Majestic Manor")
-    hero_subtitle = models.CharField(max_length=300, blank=True, null=True)
+    hero_image = DynamicImageField(blank=True, null=True)
 
     hero_image = DynamicImageField(upload_to="homepage/", blank=True, null=True)
     room1_title = models.CharField(max_length=100, blank=True, null=True)
-    room1_image = DynamicImageField(upload_to="homepage/", blank=True, null=True)
+    room1_image = DynamicImageField(blank=True, null=True)
 
     room2_title = models.CharField(max_length=100, blank=True, null=True)
-    room2_image = DynamicImageField(upload_to="homepage/", blank=True, null=True)
+    room2_image = DynamicImageField(blank=True, null=True)
 
     room3_title = models.CharField(max_length=100, blank=True, null=True)
-    room3_image = DynamicImageField(upload_to="homepage/", blank=True, null=True)
+    room3_image = DynamicImageField(blank=True, null=True)
 
     def __str__(self):
         return "Home Page Content"
