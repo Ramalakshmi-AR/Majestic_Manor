@@ -15,11 +15,7 @@ class Room(models.Model):
     available = models.BooleanField(default=True)
 
     main_image = models.ImageField(upload_to='rooms/', null=True, blank=True)
-    # image1 = models.ImageField(upload_to='rooms/', null=True, blank=True)
-    # image2 = models.ImageField(upload_to='rooms/', null=True, blank=True)
-    # image3 = models.ImageField(upload_to='rooms/', null=True, blank=True)
-
-
+   
     def __str__(self):
         return f"Room {self.number} ({self.get_room_type_display()})"
 

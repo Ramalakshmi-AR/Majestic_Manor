@@ -30,6 +30,8 @@ CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
 RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
 
+# RAZORPAY_KEY_ID = "rzp_test_RgQ7aqPF3uAVyp"
+# RAZORPAY_KEY_SECRET = "5Ktz63WjFVnzVBfhAXgNWCHR"
 
 
 # ----------------------------------------------------
@@ -145,4 +147,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ----------------------------------------------------
 # DEBUG INFO (optional, remove in production)
 # ----------------------------------------------------
+LOGIN_REDIRECT_URL = 'book:home'
 

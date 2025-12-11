@@ -1,6 +1,62 @@
 {% extends "book/base.html" %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'book/css/style.css' %}">
+
+
+<div class="container my-5">
+
+    <h2 class="text-center fw-bold mb-4">Our Departments</h2>
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- Booking -->
+        <div class="col-md-5 col-lg-4">
+            <a href="{% url 'book:room_list' %}" class="text-decoration-none">
+                <div class="card shadow-sm department-card text-center p-4">
+                    <div class="fs-1">🛏️</div>
+                    <h4 class="mt-3">Booking Department</h4>
+                    <p class="text-muted small">Manage room reservations and availability.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Billing -->
+        <div class="col-md-5 col-lg-4">
+            <a href="{% url 'billing:dashboard' %}" class="text-decoration-none">
+                <div class="card shadow-sm department-card text-center p-4">
+                    <div class="fs-1">💳</div>
+                    <h4 class="mt-3">Billing Department</h4>
+                    <p class="text-muted small">Handle payments, invoices and transactions.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Hospitality -->
+        <div class="col-md-5 col-lg-4">
+            <a href="{% url 'hospitality:index' %}" class="text-decoration-none">
+                <div class="card shadow-sm department-card text-center p-4">
+                    <div class="fs-1">🏨</div>
+                    <h4 class="mt-3">Hospitality Services</h4>
+                    <p class="text-muted small">Customer services, food, comfort & guest care.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Reporting -->
+        <div class="col-md-5 col-lg-4">
+            <a href="{% url 'reporting:index' %}" class="text-decoration-none">
+                <div class="card shadow-sm department-card text-center p-4">
+                    <div class="fs-1">📊</div>
+                    <h4 class="mt-3">Reporting Portal</h4>
+                    <p class="text-muted small">View analytics, reports and business summaries.</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
 <div class="container mt-5">
     <h1>About Majestic Manor</h1>
     <p>Welcome to Majestic Manor, where luxury meets comfort. Our hotel offers world-class amenities and exceptional hospitality to ensure your stay is unforgettable.</p>

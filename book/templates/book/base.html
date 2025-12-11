@@ -27,20 +27,54 @@
 
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="{% url 'book:home' %}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'book:room_list' %}">Booking</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'billing:dashboard' %}">Billing</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'hospitality:index' %}">Hospitality</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'reporting:index' %}">Reporting</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'contact:index' %}">Contact Us</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'about:index' %}">About Us</a></li>
 
-        {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link btn btn-outline-light ms-2 px-3" href="{% url 'logout' %}">Logout</a></li>
-        {% else %}
-          <li class="nav-item"><a class="nav-link btn btn-outline-light ms-2 px-3" href="{% url 'login' %}">Login</a></li>
-        {% endif %}
-      </ul>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'book:home' %}">Home</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact:index' %}">Contact Us</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'about:index' %}">About Us</a>
+    </li>
+
+    <!-- SEARCH BAR -->
+    <form class="d-flex ms-3" role="search" method="GET" action="{% url 'book:search' %}">
+        <input class="form-control me-2"
+               type="search"
+               name="q"
+               placeholder="Search rooms, services..."
+               value="{{ request.GET.q }}">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+    </form>
+
+    <!-- SIGNUP shown before LOGIN -->
+    {% if not user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link btn btn-warning text-dark ms-3 px-3" href="{% url 'signup' %}">
+            Signup
+        </a>
+    </li>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <li class="nav-item">
+        <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-light ms-2 px-3">Logout</button>
+</form>
+
+    </li>
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link btn btn-outline-light ms-2 px-3" href="{% url 'login' %}">Login</a>
+    </li>
+    {% endif %}
+
+</ul>
+
     </div>
   </div>
 </nav>

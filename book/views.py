@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Room, Booking, Customer, HomePage
 from decimal import Decimal
 from razorpay.errors import BadRequestError, SignatureVerificationError
+from django.db.models import Q
+from datetime import date
 
 
 # -----------------------------------------------------------
@@ -26,13 +28,54 @@ def home(request):
     return render(request, "book/home.html", {"homepage": homepage})
 
 
+
+def search(request):
+    query = request.GET.get("q", "")
+    today = date.today()
+
+    # All rooms
+    results = Room.objects.filter(available=True)
+
+    # Filter booked rooms
+    booked_rooms = Booking.objects.filter(
+        check_out__gte=today,
+        status="confirmed"
+    ).values_list('room_id', flat=True)
+    results = results.exclude(id__in=booked_rooms)
+
+    # Filter by search query
+    if query:
+        results = results.filter(
+            Q(room_type__icontains=query) |
+            Q(description__icontains=query) |
+            Q(price_per_night__icontains=query)
+        )
+
+    return render(request, "book/search_results.html", {
+        "query": query,
+        "results": results
+    })
+
+
+
 # -----------------------------------------------------------
 # Room List and Details
 # -----------------------------------------------------------
 def room_list(request):
-    rooms = Room.objects.filter(available=True)
-    return render(request, "book/room_list.html", {"rooms": rooms})
+    today = date.today()
 
+    # Get all rooms
+    rooms = Room.objects.filter(available=True)
+
+    # Exclude rooms that have active bookings in the future
+    booked_rooms = Booking.objects.filter(
+        check_out__gte=today,
+        status="confirmed"  # Only exclude confirmed bookings
+    ).values_list('room_id', flat=True)
+
+    available_rooms = rooms.exclude(id__in=booked_rooms)
+
+    return render(request, "book/room_list.html", {"rooms": available_rooms})
 
 def room_detail(request, pk):
     room = get_object_or_404(Room, pk=pk)

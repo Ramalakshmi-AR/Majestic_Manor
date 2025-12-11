@@ -137,3 +137,23 @@ footer {
     background-position: center;
     height: 70vh;
 }
+
+.department-card {
+   
+    border-radius: 12px;
+
+    transition: 0.3s ease;
+}
+
+.department-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.department-card h4 {
+    font-weight: 600;
+}
+
+.department-card p {
+    margin-top: 8px;
+}
